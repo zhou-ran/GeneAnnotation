@@ -1,0 +1,5 @@
+requests==2.22.0
+click==6.7
+biothings_client==0.2.0
+pysam==0.14.1
+xmltodict==0.12.0
