@@ -3,6 +3,7 @@
 # @Time    : 2019/1/21 2:09 PM
 __author__ = 'Zhou Ran'
 
+import os.path
 import pysam
 import logging
 
@@ -382,16 +383,28 @@ class mRNA:
 def main(args):
     # tre = mRNA('18', 20684599, 20746404, file, genename='ENSMUSG00000056124')
     gtf, genelist, outfile = args
+    fetched_genes = set()
+    if os.path.isfile(outfile):
+        with open(outfile) as fh:
+            for line in fh:
+                fetched_genes.add(line.strip().split('\t')[0])
+        outfile = open(outfile, 'a')
+    else:
+        outfile = open(outfile, 'w')
+
     gid_file = open(genelist, 'r')
-    outfile = open(outfile, 'w')
     for gid in gid_file:
         if not gid:
             continue
         gid = gid.strip()
+        if gid in fetched_genes:
+            continue
+
         try:
             tre = mRNA.gene(gid, gtf)
-        except HTTPError as e:
-            logger.debug(f'A HTTPError code {e.code} in {gid}')
+        except Exception as e:
+            logger.debug(f'An error found in {gid}')
+            logger.debug(f'{gid}', e)
             continue
 
         for i in tre.txlst:

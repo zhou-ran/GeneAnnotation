@@ -128,3 +128,7 @@ dmypy.json
 
 # pycharm
 .idea/
+
+Homo_sapiens.GRCh38.101.sorted.gtf.gz*
+*.log
+test.txt
