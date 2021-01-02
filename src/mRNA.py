@@ -403,8 +403,7 @@ def main(args):
         try:
             tre = mRNA.gene(gid, gtf)
         except Exception as e:
-            logger.debug(f'An error found in {gid}')
-            logger.debug(f'{gid}', e)
+            logger.debug(f'An error found in {gid}, ', e)
             continue
 
         for i in tre.txlst:
