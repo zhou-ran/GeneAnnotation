@@ -415,9 +415,6 @@ def main(args):
     gid_file.close()
     outfile.close()
 
-
-    # print(mRNAlist)
-
 if __name__ == '__main__':
     import logging
     import sys
