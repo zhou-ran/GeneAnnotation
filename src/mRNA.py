@@ -380,9 +380,8 @@ class mRNA:
             return [intervalinput]
 
 
-def main(args):
+def main(gtf: str, genelist: str, outfile: str):
     # tre = mRNA('18', 20684599, 20746404, file, genename='ENSMUSG00000056124')
-    gtf, genelist, outfile = args
     fetched_genes = set()
     if os.path.isfile(outfile):
         with open(outfile) as fh:
@@ -418,6 +417,7 @@ def main(args):
 if __name__ == '__main__':
     import logging
     import sys
+    from fire import Fire
 
     logger = logging.getLogger()
     handler = logging.StreamHandler()
@@ -427,4 +427,4 @@ if __name__ == '__main__':
     logger.addHandler(handler)
     logger.setLevel(logging.DEBUG)
 
-    main(sys.argv[1:])
+    Fire(main)
